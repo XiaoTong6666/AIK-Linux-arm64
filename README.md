@@ -9,13 +9,17 @@ https://github.com/ndrancs/AIK-Linux-x32-x64
 - Termux(chroot-Ubuntu)
 - Ubuntu clang version 18.1.3
 
-测试由此AIK生成的new-boot.img的设备:    Xiaomi_capricorn
-
+测试由此AIK生成的new-boot.img的设备:   
+Xiaomi_capricorn    
 结果：能用
 
 用法
-解包boot.img
+解包boot.img    
+```
 ./unpackimg.sh boot.img
+```
 
 重新打包
+```
 ./repackimg.sh
+```
