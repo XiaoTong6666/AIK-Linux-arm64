@@ -47,7 +47,7 @@ if [ $? -eq "1" ]; then
 fi;
 
 cd split_img;
-file -m $bin/magic *-ramdisk.gz | cut -d: -f2 | cut -d" " -f2 > "$file-ramdiskcomp";
+file -m $bin/magic *-ramdisk | cut -d: -f2 | cut -d" " -f2 > "$file-ramdiskcomp";
 ramdiskcomp=`cat *-ramdiskcomp`;
 unpackcmd="$ramdiskcomp -dc";
 compext=$ramdiskcomp;
@@ -63,7 +63,7 @@ esac;
 if [ "$compext" ]; then
   compext=.$compext;
 fi;
-mv "$file-ramdisk.gz" "$file-ramdisk.cpio$compext";
+mv "$file-ramdisk" "$file-ramdisk.cpio$compext";
 cd ..;
 
 echo '\nUnpacking ramdisk to "ramdisk/"...\n';
