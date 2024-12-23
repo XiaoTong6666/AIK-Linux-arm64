@@ -6,6 +6,7 @@ abort() { cd "$PWD"; echo "Error!"; }
 
 args="$*";
 bin="$PWD/bin";
+PATH=$bin:$PATH;
 chmod -R 755 "$bin" "$PWD"/*.sh;
 chmod 644 "$bin/magic";
 cd "$PWD";
