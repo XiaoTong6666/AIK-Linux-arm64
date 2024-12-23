@@ -5,6 +5,7 @@
 abort() { cd "$PWD"; echo "Error!"; }
 
 args="$*";
+unset LD_PRELOAD;
 bin="$PWD/bin";
 PATH=$bin:$PATH;
 chmod -R 755 "$bin" "$PWD"/*.sh;
