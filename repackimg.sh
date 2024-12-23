@@ -53,7 +53,7 @@ esac;
 
 echo "\nGetting build information...\n";
 cd split_img;
-kernel=`ls *-zImage`;               echo "kernel = $kernel";
+kernel=`ls *-kernel`;               echo "kernel = $kernel";
 if [ "$args" = "--original" ]; then
   ramdisk=`ls *-ramdisk.cpio*`;     echo "ramdisk = $ramdisk";
   ramdisk="split_img/$ramdisk";
@@ -64,13 +64,13 @@ cmdline=`cat *-cmdline`;            echo "cmdline = $cmdline";
 board=`cat *-board`;                echo "board = $board";
 base=`cat *-base`;                  echo "base = $base";
 pagesize=`cat *-pagesize`;          echo "pagesize = $pagesize";
-kerneloff=`cat *-kerneloff`;        echo "kernel_offset = $kerneloff";
-ramdiskoff=`cat *-ramdiskoff`;      echo "ramdisk_offset = $ramdiskoff";
-tagsoff=`cat *-tagsoff`;            echo "tags_offset = $tagsoff";
+kerneloff=`cat *-kernel_offset`;    echo "kernel_offset = $kerneloff";
+ramdiskoff=`cat *-ramdisk_offset`;      echo "ramdisk_offset = $ramdiskoff";
+tagsoff=`cat *-tags_offset`;            echo "tags_offset = $tagsoff";
 if [ -f *-second ]; then
   second=`ls *-second`;             echo "second = $second";  
   second="--second split_img/$second";
-  secondoff=`cat *-secondoff`;      echo "second_offset = $secondoff";
+  secondoff=`cat *-second_offset`;      echo "second_offset = $secondoff";
   secondoff="--second_offset $secondoff";
 fi;
 if [ -f *-dtb ]; then
