@@ -9,17 +9,19 @@ https://github.com/ndrancs/AIK-Linux-x32-x64
 - Termux(chroot-Ubuntu)
 - Ubuntu clang version 18.1.3
 
-测试由此AIK生成的new-boot.img的设备:   
+食用boot.img的环境:   
 Xiaomi_capricorn    
-结果：能用
+Android_11(LineageOS_18.1)    
+ZeroTermux_0.118.1.41    
+tsu_R6687BB53-kitsune:MAGISKSU    
 
 用法
 解包boot.img    
 ```
-./unpackimg.sh boot.img
+sudo ./unpackimg.sh boot.img
 ```
 
 重新打包
 ```
-./repackimg.sh
+sudo ./repackimg.sh
 ```
