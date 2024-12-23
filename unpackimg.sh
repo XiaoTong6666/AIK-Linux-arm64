@@ -18,6 +18,7 @@ case $1 in
     return 1;;
 esac;
 
+unset LD_PRELOAD;
 bin="$PWD/bin";
 PATH=$bin:$PATH;
 chmod -R 755 "$bin" "$PWD"/*.sh;
