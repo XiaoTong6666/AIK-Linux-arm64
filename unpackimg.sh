@@ -49,7 +49,11 @@ if [ $? -eq "1" ]; then
 fi;
 
 cd split_img;
-file -m $bin/magic *-ramdisk | cut -d: -f2 | cut -d" " -f2 > "$file-ramdiskcomp";
+if [ -f *-ramdisk ] && [ -s *-ramdisk ]; then
+  file -m $bin/magic *-ramdisk | cut -d: -f2 | cut -d" " -f2 > "$file-ramdiskcomp";
+else
+  echo "data" > "$file-ramdiskcomp";
+fi;
 ramdiskcomp=`cat *-ramdiskcomp`;
 unpackcmd="$ramdiskcomp -dc";
 compext=$ramdiskcomp;
@@ -65,10 +69,11 @@ esac;
 if [ ! "$compext" ]; then
   echo "No ramdisk or unknown compression. Skipping ramdisk unpack.";
   cd ..;
-  echo "\nDone!";
+  rmdir ramdisk 2>/dev/null;
+  echo "\nDone! (Kernel only)";
   return 0;
 fi;
-mv "$file-ramdisk" "$file-ramdisk.cpio$compext";
+mv "$file-ramdisk" "$file-ramdisk.cpio.$compext";
 cd ..;
 
 echo '\nUnpacking ramdisk to "ramdisk/"...\n';
@@ -78,7 +83,7 @@ if [ ! "$compext" ]; then
   abort;
   return 1;
 fi;
-$unpackcmd "../split_img/$file-ramdisk.cpio$compext" $extra | cpio -i;
+$unpackcmd "../split_img/$file-ramdisk.cpio.$compext" $extra | cpio -i;
 if [ $? -eq "1" ]; then
   abort;
   return 1;
