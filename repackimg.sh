@@ -65,7 +65,12 @@ if [ "$args" = "--original" ]; then
   ramdisk=`ls *-ramdisk.cpio*`;     echo "ramdisk = $ramdisk";
   ramdisk="split_img/$ramdisk";
 else
-  ramdisk="ramdisk-new.cpio.$compext";
+  if [ "$skip_ramdisk" = "1" ]; then
+    echo | cpio -o -H newc > ramdisk-empty.cpio
+    ramdisk="ramdisk-empty.cpio"
+  else
+    ramdisk="ramdisk-new.cpio.$compext";
+  fi
 fi;
 cmdline=`cat *-cmdline`;            echo "cmdline = $cmdline";
 board=`cat *-board`;                echo "board = $board";
