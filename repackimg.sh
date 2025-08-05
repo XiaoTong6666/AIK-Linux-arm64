@@ -12,11 +12,16 @@ chmod -R 755 "$bin" "$PWD"/*.sh;
 chmod 644 "$bin/magic";
 cd "$PWD";
 
-if [ -z "$(ls split_img/* 2> /dev/null)" -o -z "$(ls ramdisk/* 2> /dev/null)" ]; then
-  echo "No files found to be packed/built.";
+if [ -z "$(ls split_img/* 2> /dev/null)" ]; then
+  echo "No split_img files found.";
   abort;
   return 1;
 fi;
+
+if [ ! -d ramdisk ] || [ -z "$(ls ramdisk/* 2> /dev/null)" ]; then
+  echo "No ramdisk found, will pack kernel only with empty ramdisk.";
+  skip_ramdisk=1
+fi
 
 clear;
 echo "\nAndroid Image Kitchen - RepackImg Script";
