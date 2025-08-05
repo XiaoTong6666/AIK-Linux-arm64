@@ -9,11 +9,13 @@ https://github.com/ndrancs/AIK-Linux-x32-x64
 - Termux(chroot-Ubuntu)
 - Ubuntu clang version 18.1.3
 
-食用boot.img的环境:   
-Xiaomi_capricorn    
-Android_11(LineageOS_18.1)    
+食用环境:   
+Device：Xiaomi_fuxi    
+OS：Android 14(MIUI14)    
+Kernel：Linux 5.15.78-android13    
 ZeroTermux_0.118.1.41    
-tsu_R6687BB53-kitsune:MAGISKSU    
+tsu -v:3.1.8:KernelSU    
+
 
 用法
 解包boot.img    
