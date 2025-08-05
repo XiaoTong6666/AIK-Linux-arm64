@@ -62,8 +62,11 @@ case $ramdiskcomp in
   lz4) unpackcmd="$bin/lz4 -dq"; extra="stdout";;
   *) compext="";;
 esac;
-if [ "$compext" ]; then
-  compext=.$compext;
+if [ ! "$compext" ]; then
+  echo "No ramdisk or unknown compression. Skipping ramdisk unpack.";
+  cd ..;
+  echo "\nDone!";
+  return 0;
 fi;
 mv "$file-ramdisk" "$file-ramdisk.cpio$compext";
 cd ..;
