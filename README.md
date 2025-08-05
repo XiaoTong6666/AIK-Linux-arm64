@@ -20,10 +20,10 @@ tsu -v:3.1.8:KernelSU
 用法    
 解包boot.img    
 ```
-sudo ./unpackimg.sh boot.img
+sudo ./unpackimg.sh boot.img #必须要sudo
 ```
 
 重新打包
 ```
-sudo ./repackimg.sh
+sudo ./repackimg.sh #这个也要sudo
 ```
