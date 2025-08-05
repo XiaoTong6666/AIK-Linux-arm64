@@ -17,7 +17,7 @@ ZeroTermux_0.118.1.41
 tsu -v:3.1.8:KernelSU    
 
 
-用法
+用法    
 解包boot.img    
 ```
 sudo ./unpackimg.sh boot.img
