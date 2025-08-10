@@ -80,6 +80,26 @@ pagesize=`cat *-pagesize 2>/dev/null || echo "4096"`;      echo "pagesize = $pag
 kerneloff=`cat *-kernel_offset 2>/dev/null || echo "0x00008000"`;    echo "kernel_offset = $kerneloff";
 ramdiskoff=`cat *-ramdisk_offset 2>/dev/null || echo "0x01000000"`;      echo "ramdisk_offset = $ramdiskoff";
 tagsoff=`cat *-tags_offset 2>/dev/null || echo "0x00000100"`;            echo "tags_offset = $tagsoff";
+if [ -f *-header_version ]; then
+  headerversion=`cat *-header_version`;
+  echo "header_version = $headerversion";
+  headerversion="--header_version $headerversion";
+fi;
+if [ -f *-hashtype ]; then
+  hashtype=`cat *-hashtype`;
+  echo "hashtype = $hashtype";
+  hashtype="--hashtype $hashtype";
+fi;
+if [ -f *-os_version ]; then
+  osversion=`cat *-os_version`;
+  echo "os_version = $osversion";
+  osversion="--os_version $osversion";
+fi;
+if [ -f *-os_patch_level ]; then
+  ospatchlevel=`cat *-os_patch_level`;
+  echo "os_patch_level = $ospatchlevel";
+  ospatchlevel="--os_patch_level $ospatchlevel";
+fi;
 if [ -f *-second ]; then
   second=`ls *-second`;             echo "second = $second";  
   second="--second split_img/$second";
@@ -93,10 +113,11 @@ fi;
 cd ..;
 echo "\nBuilding image...\n"
 if [ -n "$ramdisk" ]; then
-  $bin/mkbootimg --kernel "split_img/$kernel" --ramdisk "$ramdisk" $second --cmdline "$cmdline" --board "$board" --base $base --pagesize $pagesize --kernel_offset $kerneloff --ramdisk_offset $ramdiskoff $secondoff --tags_offset $tagsoff $dtb -o image-new.img;
+  $bin/mkbootimg --kernel "split_img/$kernel" --ramdisk "$ramdisk" $second --cmdline "$cmdline" --board "$board" --base $base --pagesize $pagesize --kernel_offset $kerneloff --ramdisk_offset $ramdiskoff $secondoff --tags_offset $tagsoff $dtb $headerversion $hashtype $osversion $ospatchlevel -o image-new.img;
 else
-  $bin/mkbootimg --kernel "split_img/$kernel" $second --cmdline "$cmdline" --board "$board" --base $base --pagesize $pagesize --kernel_offset $kerneloff --tags_offset $tagsoff $dtb -o image-new.img;
+  $bin/mkbootimg --kernel "split_img/$kernel" $second --cmdline "$cmdline" --board "$board" --base $base --pagesize $pagesize --kernel_offset $kerneloff --tags_offset $tagsoff $dtb $headerversion $hashtype $osversion $ospatchlevel -o image-new.img;
 fi;
+
 if [ $? -eq "1" ]; then
   abort;
   return 1;
